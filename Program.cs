@@ -220,6 +220,7 @@ namespace SHANON_FANO
 
         static void Main(string[] args)
         {
+            //Logs out the encoded form of samson
             var answer = JsonSerializer.Serialize(CreateTree("samson"));
             Console.WriteLine(answer);
 
