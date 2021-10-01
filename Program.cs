@@ -153,7 +153,6 @@ namespace SHANON_FANO
 
                         if (rightKeys.Count > 0)
                         {
-                            //right
                             var newRightAccumulator = accumulation + "1";
                             RecursiveMethod(answer: answer, rightParam: rightParameter, accumulation: newRightAccumulator);
                         }
