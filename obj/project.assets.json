@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SAMSON AMAUGO\\Documents\\code\\SHANON-FANO\\SHANON-FANO.csproj",
-      "projectName": "SHANON-FANO",
-      "projectPath": "C:\\Users\\SAMSON AMAUGO\\Documents\\code\\SHANON-FANO\\SHANON-FANO.csproj",
+      "projectUniqueName": "C:\\Users\\SAMSON AMAUGO\\Documents\\code\\SHANON-FANO\\SHANNON-FANO.csproj",
+      "projectName": "SHANNON-FANO",
+      "projectPath": "C:\\Users\\SAMSON AMAUGO\\Documents\\code\\SHANON-FANO\\SHANNON-FANO.csproj",
       "packagesPath": "C:\\Users\\SAMSON AMAUGO\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\SAMSON AMAUGO\\Documents\\code\\SHANON-FANO\\obj\\",
       "projectStyle": "PackageReference",
