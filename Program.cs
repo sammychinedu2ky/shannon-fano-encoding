@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using static System.Console;
 using Coding;
 namespace SHANON_FANO
 {
@@ -49,13 +48,11 @@ namespace SHANON_FANO
             IDictionary<char, string> answer = null,
             IDictionary<char, float> leftParam = null,
             IDictionary<char, float> rightParam = null,
-            string accumulation = "",
-            string bit = "")
+            string accumulation = ""
+           )
         {
             if (input is not null)
             {
-                // Dictionary<char, float> left = new();
-                // Dictionary<char, float> right = new();
                 List<char> keys = input.Keys.ToList();
                 List<float> val = input.Values.ToList();
                 List<float> diff = new();
@@ -103,10 +100,9 @@ namespace SHANON_FANO
             {
                 if (rightParam is not null)
                 {
-                    var bela = rightParam.Keys;
-                    foreach (var q in bela)
+                    var myKeys = rightParam.Keys;
+                    foreach (var q in myKeys)
                     {
-                        WriteLine($"My right key is {q}");
                         answer[q] = accumulation;
                     }
                     List<char> keys = rightParam.Keys.ToList();
@@ -125,10 +121,7 @@ namespace SHANON_FANO
                             diff.Add(AbsoluteDifference);
                         }
                         var minValue = diff.Min();
-
-
                         var indexOfMin = diff.IndexOf(minValue);
-
                         Dictionary<char, float> leftParameter = new();
                         Dictionary<char, float> rightParameter = new();
                         var leftKeys = new List<char>();
@@ -164,19 +157,11 @@ namespace SHANON_FANO
 
                 }
 
-
-
-
-
-
-
-
                 if (leftParam is not null)
                 {
-                    var bela = leftParam.Keys;
-                    foreach (var q in bela)
+                    var myKeys = leftParam.Keys;
+                    foreach (var q in myKeys)
                     {
-                        WriteLine($"My left key is {q}");
                         answer[q] = accumulation;
                     }
                     List<char> keys = leftParam.Keys.ToList();
@@ -188,17 +173,13 @@ namespace SHANON_FANO
                         {
                             var leftList = val.Slice(0, i + 1);
                             var rightList = val.Slice(i + 1, val.Count);
-
                             var leftSum = leftList.Aggregate((a, b) => a + b);
                             var rightSum = rightList.Aggregate((a, b) => a + b);
                             var AbsoluteDifference = Math.Abs(leftSum - rightSum);
                             diff.Add(AbsoluteDifference);
                         }
                         var minValue = diff.Min();
-
-
                         var indexOfMin = diff.IndexOf(minValue);
-
                         Dictionary<char, float> leftParameter = new();
                         Dictionary<char, float> rightParameter = new();
                         var leftKeys = new List<char>();
@@ -222,16 +203,12 @@ namespace SHANON_FANO
                             var newLeftAccumulator = accumulation + "0";
                             RecursiveMethod(answer: answer, leftParam: leftParameter, accumulation: newLeftAccumulator);
                         }
-
                         if (rightKeys.Count > 0)
                         {
-                            //right
                             var newRightAccumulator = accumulation + "1";
                             RecursiveMethod(answer: answer, rightParam: rightParameter, accumulation: newRightAccumulator);
                         }
                     }
-
-
                 }
 
             }
@@ -241,9 +218,8 @@ namespace SHANON_FANO
 
         static void Main(string[] args)
         {
-            var se = JsonSerializer.Serialize(CreateTree("abracadabra"));
-            Console.WriteLine(se);
-
+            var answer = JsonSerializer.Serialize(CreateTree("samson"));
+            Console.WriteLine(answer);
 
         }
 
