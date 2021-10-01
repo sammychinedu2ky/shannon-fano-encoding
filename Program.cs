@@ -39,11 +39,12 @@ namespace SHANON_FANO
             {
                 answer[i] = "";
             });
-            if(probClass.Keys.Count>1){
-                 RecursiveMethod(probClass, answer: answer);
+            if (probClass.Keys.Count > 1)
+            {
+                RecursiveMethod(probClass, answer: answer);
             }
-            else answer[probClass.Keys.ToList()[0]]="0";
-           
+            else answer[probClass.Keys.ToList()[0]] = "0";
+
             return answer;
         }
 
@@ -216,8 +217,6 @@ namespace SHANON_FANO
                 }
 
             }
-
-
         }
 
         static void Main(string[] args)
