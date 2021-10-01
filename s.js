@@ -18,7 +18,7 @@ function returnWordProb(word) {
    return sorted
 }
 
-function comparisonArr(start,wordValues){
+function comparisonArr(start,wordValues,prevStage,prevStart){
    let newArr = wordValues.slice(start);
    let indexArr = [];
    indexArr.length=newArr.length;
@@ -77,9 +77,11 @@ function shanon(word){
     let stages = []
     let shouldContinue = true;
     let start = 0;
+    let prevStart = 0;
     while(shouldContinue){
-       let stage =  comparisonArr(start,wordValues)
+       let stage =  comparisonArr(start,wordValues,stages[stages.length-1],prevStart)
        stages.push(stage[0]);
+       prevStart=start;
        start+=stage[1]
        if(stage[0].length==2)shouldContinue=false
         
