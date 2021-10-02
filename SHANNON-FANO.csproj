@@ -7,6 +7,24 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>shannon</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+    <Authors>Samson Amaugo</Authors>
+    <Product>Cli tool</Product>
+    <Description>A cli tool that encodes characters using the Shannon-Fano Algorithm</Description>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/sammychinedu2ky/shannon-fano-encoding</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sammychinedu2ky/shannon-fano-encoding</RepositoryUrl>
+    <PackageTags>cli-tool</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="license.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
 </Project>
+
+
