@@ -226,7 +226,7 @@ namespace SHANON_FANO
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Empty string argument");
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine($"example of a command: \ndotnet run -- hello");
+                Console.WriteLine($"example of a command: \nshannon hello");
                 Console.ResetColor();
             }
             else
