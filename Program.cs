@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using Coding;
+using NeedSomeSlice;
 namespace SHANON_FANO
 {
     class Program
@@ -220,9 +220,23 @@ namespace SHANON_FANO
 
         static void Main(string[] args)
         {
-            //Logs out the encoded form of samson
-            var answer = JsonSerializer.Serialize(CreateTree("samson"));
-            Console.WriteLine(answer);
+
+            if (args.Length == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Empty string argument");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine($"example of a command: \ndotnet run -- hello");
+                Console.ResetColor();
+            }
+            else
+            {
+                var answer = JsonSerializer.Serialize(CreateTree(args[0]));
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine(answer);
+                Console.ResetColor();
+
+            }
 
         }
 
