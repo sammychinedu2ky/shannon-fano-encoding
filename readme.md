@@ -9,3 +9,5 @@ It can be described as a variable-length coding based on the frequency of occurr
 ## Usuage 
 - `shannon [word_to_encode`]
  eg: `shannon samson`
+
+ ![shannon command line tool](shannon.gif)
