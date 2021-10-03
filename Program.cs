@@ -64,8 +64,8 @@ namespace SHANON_FANO
                 {
                     var leftList = val.Slice(0, i + 1);
                     var rightList = val.Slice(i + 1, val.Count);
-                    var leftSum = leftList.Aggregate((a, b) => a + b);
-                    var rightSum = rightList.Aggregate((a, b) => a + b);
+                    var leftSum = leftList.Sum();
+                    var rightSum = rightList.Sum();
                     var AbsoluteDifference = Math.Abs(leftSum - rightSum);
                     diff.Add(AbsoluteDifference);
                 }
@@ -113,8 +113,8 @@ namespace SHANON_FANO
                         {
                             var leftList = val.Slice(0, i + 1);
                             var rightList = val.Slice(i + 1, val.Count);
-                            var leftSum = leftList.Aggregate((a, b) => a + b);
-                            var rightSum = rightList.Aggregate((a, b) => a + b);
+                            var leftSum = leftList.Sum();
+                            var rightSum = rightList.Sum();
                             var AbsoluteDifference = Math.Abs(leftSum - rightSum);
                             diff.Add(AbsoluteDifference);
                         }
