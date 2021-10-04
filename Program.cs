@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using NeedSomeSlice;
 namespace SHANON_FANO
 {
     class Program
@@ -10,23 +9,13 @@ namespace SHANON_FANO
         static public IDictionary<char, int> returnWordProb(string word)
         {
             Dictionary<char, int> obj = new();
-            List<char> arr = word.ToCharArray().ToList();
-            foreach (var i in arr)
+            List<char> arr = word.ToList();
+            arr.ForEach(i =>
             {
-                char letter = i;
-                int count = 0;
-                arr.ForEach(element =>
-                {
-                    if (element == letter) count++;
-                });
-                obj[i] = count;
-            }
-            Dictionary<char, int> sorted = new();
-            List<char> arrOfObj = obj.Keys.ToList().OrderByDescending(a => obj[a]).ToList();
-            arrOfObj.ForEach(i =>
-            {
-                sorted[i] = obj[i];
+                var found = obj.TryGetValue(i, out int value) ? obj[i]++ : obj[i] = 1;
             });
+            Dictionary<char, int> sorted = new();
+            sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
             return sorted;
         }
 
@@ -63,34 +52,28 @@ namespace SHANON_FANO
             {
                 for (var i = 0; i < val.Count() - 1; i++)
                 {
-                    var leftList =  val.ToArray()[0..(i+1)].Sum();
-                    var rightList = val.ToArray()[(i+1)..].Sum();
-                    diff.Add(Math.Abs(leftList-rightList));
+                    var leftList = val.ToArray()[0..(i + 1)].Sum();
+                    var rightList = val.ToArray()[(i + 1)..].Sum();
+                    diff.Add(Math.Abs(leftList - rightList));
                 }
-
-                var minValue = diff.Min();
-                var indexOfMin = diff.IndexOf(minValue);
-                Dictionary<char,int> leftParameter = new();
-                Dictionary<char,int> rightParameter = new();
-               for (int i=0; i<indexOfMin+1; i++){
-                   leftParameter[keys[val[i]]] = val[i];
-                   
-                   
-               }
-               for(int i=indexOfMin+1; i<val.Count(); i++){
-                   rightParameter[keys[val[i]]] = val[i];
-                   Console.WriteLine(i);
-                   Console.WriteLine(val[i]);
-               }
+                var indexOfMin = diff.IndexOf(diff.Min());
+                Dictionary<char, int> leftParameter = new();
+                Dictionary<char, int> rightParameter = new();
+                for (int i = 0; i < indexOfMin + 1; i++)
+                {
+                    leftParameter[keys[i]] = val[i];
+                }
+                for (int i = indexOfMin + 1; i < val.Count(); i++)
+                {
+                    rightParameter[keys[i]] = val[i];
+                }
                 if (leftParameter.Values.Count >= 0)
                 {
-                    var newLeftAccumulator = accumulation + "0";
-                    RecursiveMethod(answer: answer, group: leftParameter, accumulation: newLeftAccumulator);
+                    RecursiveMethod(answer: answer, group: leftParameter, accumulation: accumulation + "0");
                 }
                 if (rightParameter.Values.Count >= 0)
                 {
-                    var newRightAccumulator = accumulation + "1";
-                    RecursiveMethod(answer: answer, group: rightParameter, accumulation: newRightAccumulator);
+                    RecursiveMethod(answer: answer, group: rightParameter, accumulation: accumulation + "1");
                 }
             }
 
