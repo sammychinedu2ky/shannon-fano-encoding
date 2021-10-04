@@ -6,7 +6,7 @@ It can be described as a variable-length coding based on the frequency of occurr
 ## Installation
 - `dotnet tool install --global SHANNON-FANO --version 1.1.1`
 
-## Usuage 
+## Usage 
 - `shannon [word_to_encode`]
  eg: `shannon samson`
 
