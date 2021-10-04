@@ -2,37 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using NeedSomeSlice;
 namespace SHANON_FANO
 {
     class Program
     {
-        static public IDictionary<char, float> returnWordProb(string word)
+        static public IDictionary<char, int> returnWordProb(string word)
         {
-            Dictionary<char, float> obj = new();
-            List<char> arr = word.ToCharArray().ToList();
-            foreach (var i in arr)
+            Dictionary<char, int> obj = new();
+            List<char> arr = word.ToList();
+            arr.ForEach(i =>
             {
-                char letter = i;
-                int count = 0;
-                arr.ForEach(element =>
-                {
-                    if (element == letter) count++;
-                });
-                obj[i] = count;
-            }
-            Dictionary<char, float> sorted = new();
-            List<char> arrOfObj = obj.Keys.ToList().OrderByDescending(a => obj[a]).ToList();
-            arrOfObj.ForEach(i =>
-            {
-                sorted[i] = (obj[i] / word.Length);
+                var found = obj.TryGetValue(i, out int value) ? obj[i]++ : obj[i] = 1;
             });
+            Dictionary<char, int> sorted = new();
+            sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
             return sorted;
         }
 
         static public IDictionary<char, string> CreateTree(string word)
         {
-            IDictionary<char, float> probClass = returnWordProb(word);
+            IDictionary<char, int> probClass = returnWordProb(word);
             Dictionary<char, string> answer = new();
             probClass.Keys.ToList().ForEach(i =>
             {
@@ -48,7 +37,7 @@ namespace SHANON_FANO
 
         static public void RecursiveMethod(
             IDictionary<char, string> answer = null,
-            IDictionary<char, float> group = null,
+            IDictionary<char, int> group = null,
             string accumulation = ""
            )
         {
@@ -57,48 +46,34 @@ namespace SHANON_FANO
                 answer[q] = accumulation;
             }
             List<char> keys = group.Keys.ToList();
-            List<float> val = group.Values.ToList();
-            List<float> diff = new();
+            List<int> val = group.Values.ToList();
+            List<int> diff = new();
             if (val.Count > 1)
             {
                 for (var i = 0; i < val.Count() - 1; i++)
                 {
-                    var leftList = val.Slice(0, i + 1);
-                    var rightList = val.Slice(i + 1, val.Count);
-                    var leftSum = leftList.Sum();
-                    var rightSum = rightList.Sum();
-                    var AbsoluteDifference = Math.Abs(leftSum - rightSum);
-                    diff.Add(AbsoluteDifference);
+                    var leftList = val.ToArray()[0..(i + 1)].Sum();
+                    var rightList = val.ToArray()[(i + 1)..].Sum();
+                    diff.Add(Math.Abs(leftList - rightList));
                 }
-                var minValue = diff.Min();
-                var indexOfMin = diff.IndexOf(minValue);
-                Dictionary<char, float> leftParameter = new();
-                Dictionary<char, float> rightParameter = new();
-                var leftKeys = new List<char>();
-                leftKeys.AddRange(keys.Slice(0, indexOfMin + 1));
-                var leftValues = new List<float>();
-                leftValues.AddRange(val.Slice(0, indexOfMin + 1));
-                for (var i = 0; i < leftKeys.Count; i++)
+                var indexOfMin = diff.IndexOf(diff.Min());
+                Dictionary<char, int> leftParameter = new();
+                Dictionary<char, int> rightParameter = new();
+                for (int i = 0; i < indexOfMin + 1; i++)
                 {
-                    leftParameter.Add(leftKeys[i], leftValues[i]);
+                    leftParameter[keys[i]] = val[i];
                 }
-                var rightKeys = new List<char>();
-                rightKeys.AddRange(keys.Slice(indexOfMin + 1, keys.Count));
-                var rightValues = new List<float>();
-                rightValues.AddRange(val.Slice(indexOfMin + 1, keys.Count));
-                for (var i = 0; i < rightKeys.Count; i++)
+                for (int i = indexOfMin + 1; i < val.Count(); i++)
                 {
-                    rightParameter.Add(rightKeys[i], rightValues[i]);
+                    rightParameter[keys[i]] = val[i];
                 }
-                if (leftKeys.Count >= 0)
+                if (leftParameter.Values.Count >= 0)
                 {
-                    var newLeftAccumulator = accumulation + "0";
-                    RecursiveMethod(answer: answer, group: leftParameter, accumulation: newLeftAccumulator);
+                    RecursiveMethod(answer: answer, group: leftParameter, accumulation: accumulation + "0");
                 }
-                if (rightKeys.Count >= 0)
+                if (rightParameter.Values.Count >= 0)
                 {
-                    var newRightAccumulator = accumulation + "1";
-                    RecursiveMethod(answer: answer, group: rightParameter, accumulation: newRightAccumulator);
+                    RecursiveMethod(answer: answer, group: rightParameter, accumulation: accumulation + "1");
                 }
             }
 
