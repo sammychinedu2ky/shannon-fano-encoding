@@ -67,7 +67,6 @@ namespace SHANON_FANO
                     var rightList = val.ToArray()[(i+1)..].Sum();
                     diff.Add(Math.Abs(leftList-rightList));
                 }
-           diff.ToList().ForEach(i=>Console.WriteLine(i));
 
                 var minValue = diff.Min();
                 var indexOfMin = diff.IndexOf(minValue);
@@ -76,16 +75,19 @@ namespace SHANON_FANO
                for (int i=0; i<indexOfMin+1; i++){
                    leftParameter[keys[val[i]]] = val[i];
                    
+                   
                }
                for(int i=indexOfMin+1; i<val.Count(); i++){
                    rightParameter[keys[val[i]]] = val[i];
+                   Console.WriteLine(i);
+                   Console.WriteLine(val[i]);
                }
-                if (leftParameter.Keys.Count >= 0)
+                if (leftParameter.Values.Count >= 0)
                 {
                     var newLeftAccumulator = accumulation + "0";
                     RecursiveMethod(answer: answer, group: leftParameter, accumulation: newLeftAccumulator);
                 }
-                if (rightParameter.Keys.Count >= 0)
+                if (rightParameter.Values.Count >= 0)
                 {
                     var newRightAccumulator = accumulation + "1";
                     RecursiveMethod(answer: answer, group: rightParameter, accumulation: newRightAccumulator);
