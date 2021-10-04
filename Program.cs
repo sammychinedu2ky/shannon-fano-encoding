@@ -52,7 +52,7 @@ namespace SHANON_FANO
             {
                 for (var i = 0; i < val.Count() - 1; i++)
                 {
-                    var leftList = val.ToArray()[0..(i + 1)].Sum();
+                    var leftList = val.ToArray()[0 .. (i + 1)].Sum();
                     var rightList = val.ToArray()[(i + 1)..].Sum();
                     diff.Add(Math.Abs(leftList - rightList));
                 }
