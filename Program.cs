@@ -40,7 +40,7 @@ namespace SHANON_FANO
             List<int> diff = new();
             if (val.Count > 1)
             {
-                diff = val.Select((_, index) => Math.Abs(val.ToArray()[0..(index + 1)].Sum() - val.ToArray()[(index + 1)..].Sum())).ToList().GetRange(0, val.Count - 1);
+                diff = val.Select((_, index) => Math.Abs(val.ToArray()[0 ..(index + 1)].Sum() - val.ToArray()[(index + 1)..].Sum())).ToList().GetRange(0, val.Count - 1);
                 var indexOfMin = diff.IndexOf(diff.Min());
                 Dictionary<char, int> leftParameter = new();
                 Dictionary<char, int> rightParameter = new();
@@ -52,11 +52,11 @@ namespace SHANON_FANO
                 {
                     rightParameter[keys[i]] = val[i];
                 }
-                if (leftParameter.Values.Count >= 0)
+                if (leftParameter.Values.Count > 0)
                 {
                     RecursiveMethod(group: leftParameter, accumulation: accumulation + "0");
                 }
-                if (rightParameter.Values.Count >= 0)
+                if (rightParameter.Values.Count > 0)
                 {
                     RecursiveMethod(group: rightParameter, accumulation: accumulation + "1");
                 }
