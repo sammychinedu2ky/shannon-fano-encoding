@@ -52,11 +52,11 @@ namespace SHANON_FANO
                 {
                     rightParameter[keys[i]] = val[i];
                 }
-                if (leftParameter.Values.Count >= 0)
+                if (leftParameter.Values.Count > 0)
                 {
                     RecursiveMethod(group: leftParameter, accumulation: accumulation + "0");
                 }
-                if (rightParameter.Values.Count >= 0)
+                if (rightParameter.Values.Count > 0)
                 {
                     RecursiveMethod(group: rightParameter, accumulation: accumulation + "1");
                 }
