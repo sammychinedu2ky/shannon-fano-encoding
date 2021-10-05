@@ -41,10 +41,7 @@ namespace SHANON_FANO
             string accumulation = ""
            )
         {
-            foreach (var q in group.Keys)
-            {
-                answer[q] = accumulation;
-            }
+            group.Keys.ToList().ForEach(i=>answer[i]=accumulation);
             List<char> keys = group.Keys.ToList();
             List<int> val = group.Values.ToList();
             List<int> diff = new();
