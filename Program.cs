@@ -13,8 +13,7 @@ namespace SHANON_FANO
             {
                 var found = obj.TryGetValue(i, out int value) ? obj[i]++ : obj[i] = 1;
             });
-            Dictionary<char, int> sorted = new();
-            sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
+            Dictionary<char, int> sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
             return sorted;
         }
 
