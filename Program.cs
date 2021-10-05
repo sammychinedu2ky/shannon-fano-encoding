@@ -6,22 +6,20 @@ namespace SHANON_FANO
 {
     class Program
     {
-        static public IDictionary<char, int> returnWordProb(string word)
+        static public IDictionary<char, int> ReturnWordCount(string word)
         {
             Dictionary<char, int> obj = new();
-            List<char> arr = word.ToList();
-            arr.ForEach(i =>
+             word.ToList().ForEach(i =>
             {
                 var found = obj.TryGetValue(i, out int value) ? obj[i]++ : obj[i] = 1;
             });
-            Dictionary<char, int> sorted = new();
-            sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
+            Dictionary<char, int> sorted = obj.OrderByDescending(i => i.Value).ToDictionary(i => i.Key, i => i.Value);
             return sorted;
         }
 
         static public IDictionary<char, string> CreateTree(string word)
         {
-            IDictionary<char, int> probClass = returnWordProb(word);
+            IDictionary<char, int> probClass = ReturnWordCount(word);
             Dictionary<char, string> answer = new();
             probClass.Keys.ToList().ForEach(i =>
             {
