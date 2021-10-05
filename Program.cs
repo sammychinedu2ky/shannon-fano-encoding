@@ -50,12 +50,7 @@ namespace SHANON_FANO
             List<int> diff = new();
             if (val.Count > 1)
             {
-                for (var i = 0; i < val.Count() - 1; i++)
-                {
-                    var leftList = val.ToArray()[0 .. (i + 1)].Sum();
-                    var rightList = val.ToArray()[(i + 1)..].Sum();
-                    diff.Add(Math.Abs(leftList - rightList));
-                }
+                diff = val.Select((_, index) => Math.Abs(val.ToArray()[0 ..(index + 1)].Sum() - val.ToArray()[(index + 1)..].Sum())).ToList().GetRange(0, val.Count - 1);
                 var indexOfMin = diff.IndexOf(diff.Min());
                 Dictionary<char, int> leftParameter = new();
                 Dictionary<char, int> rightParameter = new();
